@@ -1,0 +1,27 @@
+{
+    "peacock.color": "#041121",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#0a284e",
+        "activityBar.background": "#0a284e",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#aa1657",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#0a284e",
+        "statusBar.background": "#041121",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#0a284e",
+        "statusBarItem.remoteBackground": "#041121",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#041121",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#04112199",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "cSpell.words": [
+        "Firebse",
+        "firestore",
+        "leaderboard"
+    ]
+}

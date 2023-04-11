@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "601449288212",
+    "project_id": "tactical-app",
+    "storage_bucket": "tactical-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601449288212:android:f9a6925fa339c01b7d8d01",
+        "android_client_info": {
+          "package_name": "com.example.tacticle_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601449288212-mmqidce2jl46i92aea6fkuuumgpv4udo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ7OjDnJRiNpLNQQYfVf3fBHCFQsbPKhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601449288212-mmqidce2jl46i92aea6fkuuumgpv4udo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
