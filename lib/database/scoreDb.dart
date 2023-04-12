@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataService {
@@ -8,7 +7,7 @@ class DataService {
     try {
       final querySnapshot = await _firestore
           .collection('TestData')
-          .orderBy('age', descending: true)
+          .orderBy('Score', descending: true)
           .get();
       final List<DocumentSnapshot> documents = querySnapshot.docs;
       return documents

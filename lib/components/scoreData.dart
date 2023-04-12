@@ -52,11 +52,11 @@ class scoreDataList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              data['name'],
+                              data['Time'].toString(),
                               style: FontTheme.regularText,
                             ),
                             Text(
-                              data['age'].toString(),
+                              data['Score'].toString(),
                               style: FontTheme.regularText,
                             ),
                           ],
