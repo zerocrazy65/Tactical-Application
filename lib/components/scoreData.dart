@@ -27,7 +27,9 @@ class scoreDataList extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: loadingAnimation());
+                  return Center(
+                    child: loadingAnimation(),
+                  );
                 }
                 if (snapshot.hasError || !snapshot.hasData) {
                   return const Text('Error fetching data.');
