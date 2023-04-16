@@ -1,16 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tacticle_app/models/style.dart';
+import '../database/auth.dart';
 import '../database/scoreDb.dart';
 import 'widget/loading.dart';
 
 class scoreDataList extends StatelessWidget {
+  final User? user = Auth().currentUser;
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           title: Text(
-            'Score',
+            user?.email ?? 'user email',
             style: FontTheme.headerText,
           ),
           centerTitle: true,
@@ -33,6 +37,11 @@ class scoreDataList extends StatelessWidget {
                 }
                 if (snapshot.hasError || !snapshot.hasData) {
                   return const Text('Error fetching data.');
+                }
+                if (snapshot.data != null && snapshot.data!.isEmpty) {
+                  return Column(children: const [
+                    Text('Text'),
+                  ]);
                 }
                 return Column(
                   children: snapshot.data!.map((data) {

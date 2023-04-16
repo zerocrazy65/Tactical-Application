@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tacticle_app/database/auth.dart';
 import 'package:tacticle_app/models/style.dart';
 import '../components/scoreData.dart';
 
