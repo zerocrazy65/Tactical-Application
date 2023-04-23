@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import '../components/widget/loading.dart';
 import '../models/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -13,7 +16,7 @@ class TrainingPage extends StatefulWidget {
 class _TrainingPageState extends State<TrainingPage> {
   late final DatabaseReference _scoreRef;
   bool _isRunning = false;
-
+  late Timer _timer;
   @override
   void initState() {
     super.initState();
@@ -21,7 +24,7 @@ class _TrainingPageState extends State<TrainingPage> {
     _scoreRef = FirebaseDatabase.instance.ref().child('username');
   }
 
-  void _updateScore(bool newStatus) {
+  void _updateScore(int newStatus) {
     _scoreRef.child('status').set(newStatus);
   }
 
@@ -77,10 +80,14 @@ class _TrainingPageState extends State<TrainingPage> {
                   child: StreamBuilder(
                     stream: _scoreRef.onValue,
                     builder: (context, snapshot) {
-                      final data = snapshot.data?.snapshot.value
-                          as Map<dynamic, dynamic>?;
-                      if (data != null) {
-                        final time = data['time'];
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: loadingAnimation(),
+                        );
+                      }
+                      final data = snapshot.data?.snapshot.value;
+                      if (data is Map<dynamic, dynamic>) {
+                        var time = data['time'];
                         final plus = data['plus'];
                         final miss = data['miss'];
                         // Use the score, plus, and miss values as needed
@@ -117,11 +124,28 @@ class _TrainingPageState extends State<TrainingPage> {
                                 setState(() {
                                   _isRunning = !_isRunning;
                                   if (_isRunning) {
-                                    _updateScore(true);
+                                    _updateScore(1);
+
+                                    const oneSec = Duration(seconds: 1);
+                                    _timer = Timer.periodic(
+                                      oneSec,
+                                      (Timer timer) {
+                                        if (time == 0) {
+                                          timer.cancel();
+                                        } else {
+                                          time--;
+                                          FirebaseDatabase.instance
+                                              .ref()
+                                              .child('username')
+                                              .update({'time': time});
+                                        }
+                                      },
+                                    );
                                   }
                                   if (!_isRunning) {
                                     _scoreRef.child('end').set(1);
-                                    _updateScore(false);
+                                    _updateScore(0);
+                                    _timer.cancel();
                                   }
                                 });
                               },
