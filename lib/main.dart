@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tacticle_app/components/widget/login.dart';
-import 'package:tacticle_app/models/style.dart';
 
 void main() async {
   // Initialize Firebase App
