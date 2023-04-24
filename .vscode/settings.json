@@ -20,5 +20,10 @@
    },
    "peacock.color": "34344F",
    "workbench.colorTheme": "Material Theme Palenight High Contrast",
-   "cSpell.words": ["Firebse", "firestore", "leaderboard"]
+   "cSpell.words": [
+      "accountname",
+      "Firebse",
+      "firestore",
+      "leaderboard"
+   ]
 }

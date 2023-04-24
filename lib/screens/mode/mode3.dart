@@ -79,7 +79,7 @@ class _Mode3State extends State<Mode3> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => TrainingPage()));
               },
-              child: Text('Start Test')),
+              child: Text('Next')),
         )
       ],
     );

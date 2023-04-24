@@ -1,8 +1,9 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../components/widget/loading.dart';
+import '../database/auth.dart';
 import '../models/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -15,8 +16,9 @@ class TrainingPage extends StatefulWidget {
 
 class _TrainingPageState extends State<TrainingPage> {
   late final DatabaseReference _scoreRef;
-  bool _isRunning = false;
   late Timer _timer;
+  final User? user = Auth().currentUser;
+  bool _isRunning = false;
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _TrainingPageState extends State<TrainingPage> {
 
   void _updateScore(int newStatus) {
     _scoreRef.child('status').set(newStatus);
+    _scoreRef.child('name').set(user?.email ?? 'user email');
   }
 
   @override

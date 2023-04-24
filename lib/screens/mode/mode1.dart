@@ -81,7 +81,7 @@ class _Mode1State extends State<Mode1> {
                     MaterialPageRoute(
                         builder: (context) => const TrainingPage()));
               },
-              child: Text('Start Test')),
+              child: Text('Next')),
         )
       ],
     );
