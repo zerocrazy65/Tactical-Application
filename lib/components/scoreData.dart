@@ -5,8 +5,37 @@ import '../database/auth.dart';
 import '../database/scoreDb.dart';
 import 'widget/loading.dart';
 
-class scoreDataList extends StatelessWidget {
+class ScoreDataList extends StatefulWidget {
+  const ScoreDataList({Key? key}) : super(key: key);
+
+  @override
+  _ScoreDataListState createState() => _ScoreDataListState();
+}
+
+class _ScoreDataListState extends State<ScoreDataList> {
+  String selectedButton = 'Time'; // initially set to 'Score'
   final User? user = Auth().currentUser;
+  bool _isScoreActive = false; // initially Time button is active
+  bool _isTimeActive = true; // initially Time button is active
+  void _toggleButton(bool isTime) {
+    setState(() {
+      if (isTime) {
+        _isScoreActive = true;
+        _isTimeActive = false;
+        selectedButton = 'Score';
+      } else {
+        _isScoreActive = false;
+        _isTimeActive = true;
+        selectedButton = 'Time';
+      }
+    });
+  }
+
+  String formatTime(int minutes) {
+    int hours = (minutes / 60).floor();
+    int min = minutes % 60;
+    return '$hours : ${min < 10 ? '0' : ''}$min';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +43,7 @@ class scoreDataList extends StatelessWidget {
       slivers: [
         SliverAppBar(
           title: Text(
-            user?.email ?? 'user email',
+            'Leader Board',
             style: FontTheme.headerText,
           ),
           centerTitle: true,
@@ -23,8 +52,42 @@ class scoreDataList extends StatelessWidget {
         ),
         SliverList(
           delegate: SliverChildListDelegate([
-            const SizedBox(
-              height: 5,
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => {
+                      _toggleButton(false),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          _isTimeActive ? Colors.blue : Colors.grey,
+                    ),
+                    child: const Text(
+                      'Time',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => {
+                      _toggleButton(true),
+                      selectedButton = 'Score',
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          _isScoreActive ? Colors.blue : Colors.grey,
+                    ),
+                    child: const Text(
+                      'Score',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
             ),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: DataService.fetchData(),
@@ -43,6 +106,17 @@ class scoreDataList extends StatelessWidget {
                     Text('Text'),
                   ]);
                 }
+                snapshot.data!.sort((a, b) {
+                  if (selectedButton == 'Score') {
+                    print(selectedButton);
+                    return b['Score'].compareTo(
+                        a['Score']); // sort by score in descending order
+                  } else {
+                    print(selectedButton);
+                    return a['Time'].compareTo(
+                        b['Time']); // sort by time in ascending order
+                  }
+                });
                 return Column(
                   children: snapshot.data!.map((data) {
                     return ListTile(
@@ -63,13 +137,21 @@ class scoreDataList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              data['Time'].toString(),
+                              data['Email'].toString(),
                               style: FontTheme.regularText,
                             ),
-                            Text(
-                              data['Score'].toString(),
-                              style: FontTheme.regularText,
-                            ),
+                            if (_isTimeActive)
+                              Text(
+                                formatTime(
+                                  data['Time'],
+                                ),
+                                style: FontTheme.regularText,
+                              ),
+                            if (_isScoreActive)
+                              Text(
+                                data['Score'].toString(),
+                                style: FontTheme.regularText,
+                              ),
                           ],
                         ),
                       ),

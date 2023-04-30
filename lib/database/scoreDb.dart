@@ -5,10 +5,7 @@ class DataService {
 
   static Future<List<Map<String, dynamic>>> fetchData() async {
     try {
-      final querySnapshot = await _firestore
-          .collection('TestData')
-          .orderBy('Score', descending: true)
-          .get();
+      final querySnapshot = await _firestore.collection('TestData').get();
       final List<DocumentSnapshot> documents = querySnapshot.docs;
       return documents
           .map((doc) => doc.data() as Map<String, dynamic>)

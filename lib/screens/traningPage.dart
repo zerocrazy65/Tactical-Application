@@ -28,7 +28,7 @@ class _TrainingPageState extends State<TrainingPage> {
 
   void _updateScore(int newStatus) {
     _scoreRef.child('status').set(newStatus);
-    _scoreRef.child('name').set(user?.email ?? 'user email');
+    _scoreRef.child('email').set(user?.email ?? 'user email');
   }
 
   @override
