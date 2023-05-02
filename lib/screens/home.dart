@@ -8,11 +8,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PracticePage()));
-        },
-        child: Text('Test'));
+    return Center(
+      child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PracticePage()));
+          },
+          child: Text('Test')),
+    );
   }
 }

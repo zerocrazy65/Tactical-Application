@@ -83,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
             ),
           ),
-          Center(
+          Container(
             child: _pages[_activePage],
           ),
         ],
