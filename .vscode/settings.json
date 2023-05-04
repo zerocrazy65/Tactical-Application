@@ -19,11 +19,12 @@
       "titleBar.inactiveForeground": "#e7e7e799"
    },
    "peacock.color": "34344F",
-   "workbench.colorTheme": "Default Dark Modern",
+   "workbench.colorTheme": "Material Theme Palenight High Contrast",
    "cSpell.words": [
       "accountname",
       "Firebse",
       "firestore",
-      "leaderboard"
+      "leaderboard",
+      "วางเท้าให้ห่างกันเท่ากับความกว้างของหัวไหล่"
    ]
 }
