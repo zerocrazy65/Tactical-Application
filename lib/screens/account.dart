@@ -38,6 +38,9 @@ class _AccountPageState extends State<AccountPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _userUid(),
+          const SizedBox(
+            height: 10,
+          ),
           _signOutButton(),
         ],
       ),

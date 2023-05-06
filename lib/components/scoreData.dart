@@ -43,7 +43,7 @@ class _ScoreDataListState extends State<ScoreDataList> {
       slivers: [
         SliverAppBar(
           title: Text(
-            'Leader Board',
+            'Leaderboard',
             style: FontTheme.headerText,
           ),
           centerTitle: true,
