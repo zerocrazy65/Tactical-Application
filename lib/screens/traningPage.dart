@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,9 @@ class _TrainingPageState extends State<TrainingPage> {
   late final DatabaseReference _scoreRef;
   late Timer _timer;
   final User? user = Auth().currentUser;
+  final player = AudioPlayer();
   bool _isRunning = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,9 +48,10 @@ class _TrainingPageState extends State<TrainingPage> {
       body: Stack(
         children: [
           Container(
-              height: 250,
-              width: double.infinity,
-              color: ColorTheme.bgGreenColor),
+            height: 250,
+            width: double.infinity,
+            color: ColorTheme.bgGreenColor,
+          ),
           Opacity(
             opacity: 0.05,
             child: Container(
@@ -66,20 +72,21 @@ class _TrainingPageState extends State<TrainingPage> {
                   height: 100,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(6.0),
+                  padding: const EdgeInsets.all(16.0),
                   height: MediaQuery.of(context).size.height * 0.75,
                   width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
-                      color: ColorTheme.whiteBgColor,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: ColorTheme.greyOpaColor,
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        )
-                      ]),
+                    color: ColorTheme.whiteBgColor,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: ColorTheme.greyOpaColor,
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
                   child: StreamBuilder(
                     stream: _scoreRef.onValue,
                     builder: (context, snapshot) {
@@ -100,26 +107,61 @@ class _TrainingPageState extends State<TrainingPage> {
                         }
                         // Display the values in the UI
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const SizedBox(height: 50),
                             Text(
                               'Score: ${score ?? 'none'}',
-                              style: const TextStyle(fontSize: 62),
+                              style: const TextStyle(
+                                fontSize: 48,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            const SizedBox(height: 50),
-                            Text(
-                              'Time: ${time ?? 'none'}',
-                              style: const TextStyle(fontSize: 42),
+                            const SizedBox(height: 40),
+                            const Text(
+                              'Time left:',
+                              style: TextStyle(
+                                fontSize: 28,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.timer,
+                                  size: 28,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  '${time ?? 'none'}',
+                                  style: const TextStyle(
+                                    fontSize: 42,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  's',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 20),
                             Text(
                               'Plus: ${plus ?? 'none'}',
-                              style: const TextStyle(fontSize: 22),
+                              style: const TextStyle(
+                                fontSize: 22,
+                              ),
                             ),
                             const SizedBox(height: 20),
                             Text(
                               'Miss: ${miss ?? 'none'}',
-                              style: const TextStyle(fontSize: 22),
+                              style: const TextStyle(
+                                fontSize: 22,
+                              ),
                             ),
                             const Spacer(),
                             ElevatedButton(
@@ -128,11 +170,12 @@ class _TrainingPageState extends State<TrainingPage> {
                                   _isRunning = !_isRunning;
                                   if (_isRunning) {
                                     _updateScore(1);
-
                                     const oneSec = Duration(seconds: 1);
+                                    player.play(AssetSource("audio/beep.mp3"));
                                     _timer = Timer.periodic(
                                       oneSec,
                                       (Timer timer) {
+                                        // Audio finished playing
                                         if (time == 0) {
                                           timer.cancel();
                                         } else {
@@ -146,6 +189,7 @@ class _TrainingPageState extends State<TrainingPage> {
                                     );
                                   }
                                   if (!_isRunning) {
+                                    player.play(AssetSource("audio/beep.mp3"));
                                     _scoreRef.child('end').set(1);
                                     _updateScore(0);
                                     _timer.cancel();
