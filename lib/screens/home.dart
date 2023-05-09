@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePagePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -70,24 +71,63 @@ class HomePagePageState extends State<HomePage> {
                                 height: MediaQuery.of(context).size.height / 5,
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
+                                    onPressed: () {
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ModePage(
-                                                  modeNumber: i,
-                                                )));
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.white),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.blue),
-                                  ),
-                                  child: Text('Mode $i'),
-                                ),
+                                          builder: (context) => i == 1
+                                              ? ModePage(
+                                                  modeName:
+                                                      'Shooting Practice Mode')
+                                              : i == 2
+                                                  ? ModePage(
+                                                      modeName:
+                                                          'Fast Shot Mode')
+                                                  : i == 3
+                                                      ? ModePage(
+                                                          modeName:
+                                                              'Hostage Rescue Mode')
+                                                      : Container(),
+                                        ),
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.white),
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.blue),
+                                    ),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          i == 1
+                                              ? const Icon(Icons.flash_on)
+                                              : i == 2
+                                                  ? const Icon(Icons.adjust)
+                                                  : i == 3
+                                                      ? const Icon(
+                                                          Icons.people_outline)
+                                                      : Container(),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          i == 1
+                                              ? const Text(
+                                                  'Shooting Practice Mode')
+                                              : i == 2
+                                                  ? const Text('Fast Shot Mode')
+                                                  : i == 3
+                                                      ? const Text(
+                                                          'Hostage Rescue Mode')
+                                                      : Container(),
+                                        ],
+                                      ),
+                                    )),
                               ),
                               const SizedBox(height: 15),
                             ],

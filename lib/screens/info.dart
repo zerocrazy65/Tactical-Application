@@ -19,27 +19,27 @@ class _InfoPageState extends State<InfoPage> {
         scrollDirection: Axis.vertical,
         children: const <Widget>[
           InfoCard(
-            title: 'assets/img/persona5.jpg',
+            title: "assets/img/basicUsing.jpg",
             subtitle: 'พื้นฐานการใช้อาวุธปืน',
             mode: 1,
           ),
           InfoCard(
-            title: 'assets/img/persona5.jpg',
+            title: "assets/img/gunSafety.jpg",
             subtitle: 'กฏความปลอดภัยของการใช้อาวุธปืน',
             mode: 2,
           ),
           InfoCard(
-            title: 'assets/img/persona5.jpg',
+            title: "assets/img/firearmRule.jpg",
             subtitle: 'กติกาการแข่งขัน/ฝึกซ้อมยิงปืนพื้นฐาน',
             mode: 3,
           ),
           InfoCard(
-            title: 'assets/img/persona5.jpg',
+            title: "assets/img/carSystem.jpg",
             subtitle: 'C.A.R. System',
             mode: 4,
           ),
           InfoCard(
-            title: 'assets/img/persona5.jpg',
+            title: "assets/img/gunType.jpg",
             subtitle: 'ชนิดและประเภทของปืนสั้น',
             mode: 5,
           ),

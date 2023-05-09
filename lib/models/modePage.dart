@@ -5,21 +5,21 @@ import '../screens/mode/mode2.dart';
 import '../screens/mode/mode3.dart';
 
 class ModePage extends StatelessWidget {
-  final int modeNumber;
+  final String modeName;
 
-  const ModePage({Key? key, required this.modeNumber}) : super(key: key);
+  ModePage({Key? key, required this.modeName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget modeWidget;
-    switch (modeNumber) {
-      case 1:
+    switch (modeName) {
+      case 'Shooting Practice Mode':
         modeWidget = const Mode1();
         break;
-      case 2:
+      case 'Fast Shot Mode':
         modeWidget = const Mode2();
         break;
-      case 3:
+      case 'Hostage Rescue Mode':
         modeWidget = const Mode3();
         break;
       default:
@@ -33,7 +33,7 @@ class ModePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text('Mode $modeNumber'),
+        title: Text(modeName),
       ),
       body: modeWidget,
     );

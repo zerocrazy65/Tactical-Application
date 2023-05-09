@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tacticle_app/database/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tacticle_app/models/style.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed:
           isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: ColorTheme.bgGreenColor,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
@@ -69,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       style: TextButton.styleFrom(
-        foregroundColor: Colors.blue,
+        foregroundColor: Colors.black45,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         textStyle: TextStyle(fontSize: 18),
       ),
@@ -109,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(isLogin ? 'Login' : 'Register'),
+        backgroundColor: ColorTheme.bgGreenColor,
       ),
       body: SingleChildScrollView(
         child: Container(
