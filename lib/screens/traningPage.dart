@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
@@ -34,6 +35,37 @@ class _TrainingPageState extends State<TrainingPage> {
   void _updateScore(int newStatus) {
     _scoreRef.child('status').set(newStatus);
     _scoreRef.child('email').set(user?.email ?? 'user email');
+  }
+
+  void _showDialog(
+      BuildContext context, int time, int score, int miss, int plus) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: AlertDialog(
+            title: Column(
+              children: [
+                Center(
+                    child: Text('Time : $time', textAlign: TextAlign.center)),
+                Center(
+                    child: Text('Score: $score', textAlign: TextAlign.center)),
+              ],
+            ),
+            content:
+                Text('Plus : $plus, Miss: $miss ', textAlign: TextAlign.center),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -189,6 +221,8 @@ class _TrainingPageState extends State<TrainingPage> {
                                     );
                                   }
                                   if (!_isRunning) {
+                                    _showDialog(
+                                        context, time, score, miss, plus);
                                     player.play(AssetSource("audio/beep.mp3"));
                                     _scoreRef.child('end').set(1);
                                     _updateScore(0);
@@ -204,7 +238,7 @@ class _TrainingPageState extends State<TrainingPage> {
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                     },
                   ),
