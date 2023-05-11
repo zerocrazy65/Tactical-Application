@@ -6,7 +6,8 @@ import 'package:tacticle_app/screens/traningPage.dart';
 import '../../models/style.dart';
 
 class Mode3 extends StatefulWidget {
-  const Mode3({super.key});
+  final int modeNum;
+  const Mode3({Key? key, required this.modeNum}) : super(key: key);
 
   @override
   State<Mode3> createState() => _Mode3State();
@@ -70,17 +71,21 @@ class _Mode3State extends State<Mode3> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                TrainingPage(modeNum: widget.modeNum)));
+                  },
+                  child: Text('Next')),
             ],
           ),
         ),
-        Center(
-          child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TrainingPage()));
-              },
-              child: Text('Next')),
-        )
       ],
     );
   }

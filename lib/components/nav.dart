@@ -24,7 +24,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _activePage = 0;
   @override
   Widget build(BuildContext context) {
-    debugPrint("This is the active page $_activePage");
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,

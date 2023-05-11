@@ -12,8 +12,9 @@ import '../models/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class TrainingPage extends StatefulWidget {
-  const TrainingPage({super.key});
+  final int modeNum;
 
+  const TrainingPage({Key? key, required this.modeNum}) : super(key: key);
   @override
   State<TrainingPage> createState() => _TrainingPageState();
 }
@@ -23,6 +24,7 @@ class _TrainingPageState extends State<TrainingPage> {
   late Timer _timer;
   final User? user = Auth().currentUser;
   final player = AudioPlayer();
+
   bool _isRunning = false;
 
   @override
@@ -47,7 +49,8 @@ class _TrainingPageState extends State<TrainingPage> {
             title: Column(
               children: [
                 Center(
-                    child: Text('Time : $time', textAlign: TextAlign.center)),
+                    child:
+                        Text('Time left : $time', textAlign: TextAlign.center)),
                 Center(
                     child: Text('Score: $score', textAlign: TextAlign.center)),
               ],
@@ -201,7 +204,7 @@ class _TrainingPageState extends State<TrainingPage> {
                                 setState(() {
                                   _isRunning = !_isRunning;
                                   if (_isRunning) {
-                                    _updateScore(1);
+                                    _updateScore(widget.modeNum);
                                     const oneSec = Duration(seconds: 1);
                                     player.play(AssetSource("audio/beep.mp3"));
                                     _timer = Timer.periodic(
@@ -209,7 +212,14 @@ class _TrainingPageState extends State<TrainingPage> {
                                       (Timer timer) {
                                         // Audio finished playing
                                         if (time == 0) {
-                                          timer.cancel();
+                                          _isRunning = false;
+                                          _showDialog(
+                                              context, time, score, miss, plus);
+                                          player.play(
+                                              AssetSource("audio/beep.mp3"));
+                                          _scoreRef.child('end').set(1);
+                                          _updateScore(0);
+                                          _timer.cancel();
                                         } else {
                                           time--;
                                           FirebaseDatabase.instance

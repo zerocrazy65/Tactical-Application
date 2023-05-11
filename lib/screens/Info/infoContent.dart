@@ -106,14 +106,15 @@ class InfoContentPage extends StatelessWidget {
                             'ค่อยๆลดมือลง จากนั้นจึงทำการวิเคราะห์การยิง',
                           ],
                         ),
-                        Text('References from วิธียิงปืนเบื้องต้น - Medium')
+                        Text('    References from วิธียิงปืนเบื้องต้น - Medium',
+                            style: FontTheme.miniText)
                       ]),
                     )),
                   if (mode == 2)
                     Flexible(
                         child: SingleChildScrollView(
                       child: Column(children: [
-                        Text(
+                        const Text(
                             '  สิ่งแรกที่ควรเรียนรู้และต้องฝึกให้เป็นสัญชาตญาณเกี่ยวกับอาวุธปืนคือ กฎแห่งความปลอดภัยโดยกฏความปลอดภัยเบื้องต้นมีทั้งหมด 10 ข้อคือ '),
                         _buildListItem(
                           context,
@@ -175,8 +176,9 @@ class InfoContentPage extends StatelessWidget {
                           'การใช้อาวุธปืนให้ปลอดภัย ต้องการใส่ใจ และความคิดที่รอบคอบ การมึนเมาทำให้เกิดความผิดพลาดได้ง่ายและอาจจะนำไปสู่อุบัติเหตุ',
                           [],
                         ),
-                        const Text(
-                            'Reference from https://thailandoutdoor.com/2020/04/11/gun-safety-rules/'),
+                        Text(
+                            '   Reference from https://thailandoutdoor.com/2020/04/11/gun-safety-rules/',
+                            style: FontTheme.miniText),
                       ]),
                     )),
                   if (mode == 3)
@@ -265,8 +267,9 @@ class InfoContentPage extends StatelessWidget {
                         'การนับคะแนน ให้นับคะแนนตามรอยกระสุนปืนที่ปรากฏอยู่ในเป้า โดยคะแนนทั้งสองเปูา รวมกัน 500 คะแนน  - เป้าหุ่นเงาคนครึ่งตัว คะแนนเต็ม 400 คะแนน - เป้ารูปวงรี คะแนนเต็ม 100 คะแนน ',
                         'กรณีรอยกระสุนปืนเกินอยู่ในเป้า : ตรวจสอบรอยกระสุนปืนจากเป้าทางซ้ายและขวา ถ้ามีรอยกระสุนปืนในเป้าของ ทางซ้ายหรือขวาไม่ครบ ให้ตัดคะแนนของรอยกระสุนปืนที่ได้คะแนนต่ำสุดที่ปรากฏในเป้าที่เกินออกไป ถ้าตรวจสอบรอยกระสุนปืนจากเป้าทางซ้ายและขวาแล้ว ปรากฏว่ามีรอยกระสุนปืน ของเป้าทางซ้ายและขวาครบ ให้ตัดคะแนนสูงสุดของรอยกระสุนปืนที่เกินออกไป',
                       ]),
-                      const Text(
-                          'Reference from https://policetraining9.com/index.php?option=com_attachments&task=download&id=281'),
+                      Text(
+                          '   Reference from https://policetraining9.com/index.php?option=com_attachments&task=download&id=281',
+                          style: FontTheme.miniText),
                     ]))),
                   if (mode == 4)
                     Flexible(
@@ -325,8 +328,9 @@ class InfoContentPage extends StatelessWidget {
                         'ปืนลูกโม่นั้นเมื่อบรรจุกระสุนเข้าในโม่แล้ว ปืนจะพร้อมใช้ทันที เพียงแต่เหนี่ยวไกเท่านั้น ไกระบบดับเบิ้ลแอ๊คชั่นนั้นก็ลากยาวและหนักทำให้ค่อนข้างปลอดภัย เมื่อต้องการเลิกบรรจุก็เพียงเปิดโม่เทกระสุนออกให้หมดซึ่งก็จะเห็นได้ชัดเจนไม่ซับซ้อน ปืนลูกโม่จึงเป็นปืนที่เหมาะมากสำหรับเป็นปืนป้องกันตัวสำหรับมือใหม่',
                         'ปืนสั้นกึ่งอัตโนมัติ หรือ เซมิออโต้ (บางครั้งเรียกกันสั้นๆว่าปืนออโต้) เป็นปืนที่บรรจุกระสุนในซองกระสุน (แม็กกาซีน) เอาซองกระสุนใส่ในตัวปืน เมื่อยิงไปหนึ่งนัด กลไกจะทำการสลัดปลอกกระสุนที่ยิงไปแล้วออกและป้อนกระสุนนัดใหม่เข้ารังเพลิงเพื่อให้พร้อมยิงต่อโดยอัตโนมัติ',
                       ]),
-                      const Text(
-                          'Reference from ปืนสั้น ปืนกระบอกแรกสำหรับการป้องกันตัว | ThailandOutdoor Netzine'),
+                      Text(
+                          '   Reference from ปืนสั้น ปืนกระบอกแรกสำหรับการป้องกันตัว | ThailandOutdoor Netzine',
+                          style: FontTheme.miniText),
                     ]))),
                 ],
               ),
@@ -351,7 +355,7 @@ Widget _buildListItem(
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: FontTheme.headerText,
         ),
         const SizedBox(height: 8),
         Text(subtitle),
@@ -377,7 +381,7 @@ Widget _buildListItem(
                         Expanded(
                           child: Text(
                             bullet,
-                            style: TextStyle(fontSize: 16),
+                            style: FontTheme.regularText,
                           ),
                         ),
                       ]),

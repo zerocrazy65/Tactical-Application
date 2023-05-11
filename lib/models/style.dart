@@ -13,13 +13,19 @@ class FontTheme {
   );
   static TextStyle regularText = TextStyle(
     fontSize: 16.0,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     color: primaryColor,
     fontFamily: fontStyle.fontFamily,
   );
   static TextStyle miniText = TextStyle(
-    fontSize: 10.0,
+    fontSize: 14.0,
     fontWeight: FontWeight.normal,
+    color: primaryColor,
+    fontFamily: fontStyle.fontFamily,
+  );
+  static TextStyle boldText = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
     color: primaryColor,
     fontFamily: fontStyle.fontFamily,
   );

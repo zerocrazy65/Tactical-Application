@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/modePage.dart';
+import '../components/modePage.dart';
 import '../models/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -76,17 +76,23 @@ class HomePagePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => i == 1
-                                              ? ModePage(
+                                              ? const ModePage(
                                                   modeName:
-                                                      'Shooting Practice Mode')
+                                                      'Shooting Practice Mode',
+                                                  modeNum: 1,
+                                                )
                                               : i == 2
-                                                  ? ModePage(
+                                                  ? const ModePage(
                                                       modeName:
-                                                          'Fast Shot Mode')
+                                                          'Fast Shot Mode',
+                                                      modeNum: 2,
+                                                    )
                                                   : i == 3
-                                                      ? ModePage(
+                                                      ? const ModePage(
                                                           modeName:
-                                                              'Hostage Rescue Mode')
+                                                              'Hostage Rescue Mode',
+                                                          modeNum: 3,
+                                                        )
                                                       : Container(),
                                         ),
                                       );

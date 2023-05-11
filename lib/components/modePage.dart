@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../screens/mode/mode1.dart';
@@ -6,21 +7,23 @@ import '../screens/mode/mode3.dart';
 
 class ModePage extends StatelessWidget {
   final String modeName;
+  final int modeNum;
 
-  ModePage({Key? key, required this.modeName}) : super(key: key);
+  const ModePage({Key? key, required this.modeName, required this.modeNum})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget modeWidget;
     switch (modeName) {
       case 'Shooting Practice Mode':
-        modeWidget = const Mode1();
+        modeWidget = Mode1(modeNum: modeNum);
         break;
       case 'Fast Shot Mode':
-        modeWidget = const Mode2();
+        modeWidget = Mode2(modeNum: modeNum);
         break;
       case 'Hostage Rescue Mode':
-        modeWidget = const Mode3();
+        modeWidget = Mode3(modeNum: modeNum);
         break;
       default:
         modeWidget = const Placeholder();

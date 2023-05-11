@@ -108,11 +108,9 @@ class _ScoreDataListState extends State<ScoreDataList> {
                 }
                 snapshot.data!.sort((a, b) {
                   if (selectedButton == 'Score') {
-                    print(selectedButton);
                     return b['Score'].compareTo(
                         a['Score']); // sort by score in descending order
                   } else {
-                    print(selectedButton);
                     return a['Time'].compareTo(
                         b['Time']); // sort by time in ascending order
                   }
